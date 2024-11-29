@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>范迪生</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'bootstrap-3.3.7/css/bootstrap.min.css') }}">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="{{ url_for('static', filename = 'bootstrap-3.3.7/js/jquery-1.11.1.min.js') }}"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="{{ url_for('static', filename = 'bootstrap-3.3.7/js/bootstrap.min.js') }}"></script>
+    <style>
+        body {
+            /* 设置背景图片的路径 */
+            background-image: url('{{ url_for('static', filename = 'img/background.jpg') }}');
+            /* 背景图片的填充方式，可以根据需要调整 */
+            background-size: cover; /* 调整以覆盖整个屏幕 */
+            background-repeat: no-repeat; /* 禁止重复平铺 */
+            /* 如果你希望背景图片固定不动，可以添加以下属性 */
+            background-attachment: fixed;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.5); /* 调整颜色和透明度 */
+            pointer-events: none; /* 避免伪元素阻挡用户与页面的交互 */
+            position: fixed;
+        }
+        .wrap {
+            width: 60%;
+            margin: 10px auto;
+            padding: 50px;
+        }
+        .media-body .media-heading{
+            color: #FF4040;
+        }
+        .media-body .title{
+            margin-top: 12px;
+            color: #000000;
+        }
+        .media-body .price{
+            color: #ff552e;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .wrap .item {
+            position: relative; /** 相对定位,给子节点做参照物的*/
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .wrap .item .more{
+            position: absolute; /** 绝对定位,参照设置了相对定位父节点*/
+            bottom: 1px; /** 下边距*/
+            right: 5px; /** 右边距*/
+        }
+        .wrap .item .more a {
+            text-decoration: none;
+            color: #337ab7;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
+            <li><a href="/stats"><span class="glyphicon glyphicon-list"></span>统计</a></li>
+            <li><a href="/train"><span class="glyphicon glyphicon-fire"></span>分类</a></li>
+            <li><a href="/info"><span class="glyphicon glyphicon-question-sign"></span>关于</a></li>
+            <li><a href="https://search.jd.com/Search?keyword=手机&page=1&s=1" target="_blank"><span class="glyphicon glyphicon-question-sign"></span>详情页</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="wrap">
+    {% for item in phone_list  %}
+         <div class="media item">
+              <div class="media-left">
+                <a href="#">
+                  <img class="media-object" src="{{item['图片']}}">
+                </a>
+              </div>
+              <div class="media-body">
+                 <h4 class="media-heading">{{item['商品名称']}}</h4>
+                 <div class="text-muted title">CPU类型:{{item['CPU类型']}}</div>
+                 <div class="text-muted title">运行内存:{{item['最大运行内存(GB)']}}G  机身内存:{{item['最大机身内存(GB)']}}G </div>
+                 <div class="text-muted title">最大充电功率:{{item['最大充电功率']}}</div>
+                 <div class="price title">{{item['价格']}}元</div>
+              </div>
+             <!-- 点击更多房源，跳转到服务器/recommend函数，传当前点击的这条记录的id-->
+             <div class="more"><a href="/recommend/{{item.id}}">更多款式型号</a></div>
+         </div>
+    {% endfor %}
+</div>
+</body>
+</html>

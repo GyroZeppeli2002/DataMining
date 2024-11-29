@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分析</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'bootstrap-3.3.7/css/bootstrap.min.css') }}">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="{{ url_for('static', filename = 'bootstrap-3.3.7/js/jquery-1.11.1.min.js') }}"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="{{ url_for('static', filename = 'bootstrap-3.3.7/js/bootstrap.min.js') }}"></script>
+    <style>
+        body {
+            /* 设置背景图片的路径 */
+            background-image: url('{{ url_for('static', filename = 'img/back3.jpg') }}');
+            /* 背景图片的填充方式，可以根据需要调整 */
+            background-size: cover; /* 调整以覆盖整个屏幕 */
+            background-repeat: no-repeat; /* 禁止重复平铺 */
+            /* 如果你希望背景图片固定不动，可以添加以下属性 */
+            background-attachment: fixed;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0); /* 调整颜色和透明度 */
+            pointer-events: none; /* 避免伪元素阻挡用户与页面的交互 */
+            position: fixed;
+        }
+        .wrap {
+            margin-top: 10px;
+            padding: 50px;
+        }
+        .row {
+            display: flex;
+            flex-direction: column; /* 设置为列布局，使元素垂直排列 */
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
+            <li><a href="/stats"><span class="glyphicon glyphicon-list"></span>统计</a></li>
+            <li><a href="/train"><span class="glyphicon glyphicon-fire"></span>分类</a></li>
+            <li><a href="/info"><span class="glyphicon glyphicon-question-sign"></span>关于</a></li>
+            <li><a href="https://search.jd.com/Search?keyword=手机&page=1&s=1" target="_blank"><span class="glyphicon glyphicon-question-sign"></span>详情页</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="wrap">
+    <div class="row">
+          <img src="{{ url_for('static', filename = 'img/price_pie.png')}}">
+    </div>
+
+    <div class="row">
+          <img src="{{ url_for('static', filename = 'img/price_hist.png')}}">
+    </div>
+
+    <div class="row">
+          <img src="{{ url_for('static', filename = 'img/price&goodrate_scatter.png')}}">
+    </div>
+
+    <div class="row">
+          <img src="{{ url_for('static', filename = 'img/heatmap.png')}}">
+    </div>
+
+    <div class="row">
+          <img src="{{ url_for('static', filename = 'img/phone_type.png')}}">
+    </div>
+</div>
+</body>
+</html>
